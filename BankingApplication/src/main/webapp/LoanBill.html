@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Loan Bill</title>
+</head>
+<body>
+
+  <div>
+     <div id="SuccessMsg" style="color:green"></div>
+  
+<p>
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod malesuada auctor. Nullam elementum elit felis, in convallis nisl volutpat vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla facilisi. Pellentesque vel cursus elit. In euismod ex sed nisi rhoncus, sit amet ultrices sem tincidunt. Fusce pulvinar ex quis dui sollicitudin tincidunt. Etiam metus lorem, venenatis ac erat nec, dapibus semper arcu. Suspendisse auctor massa quis neque molestie, non accumsan nisl vulputate. Vestibulum sed euismod quam.
+
+Etiam porttitor ipsum sollicitudin ipsum dictum tincidunt. Aenean ullamcorper libero id blandit posuere. Cras accumsan tincidunt justo, id lobortis massa feugiat ut. Suspendisse elit sem, ultricies id sodales tempor, auctor eu risus. Curabitur in elementum diam, vel vulputate diam. Pellentesque porttitor eget elit non finibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+
+consectetur. Etiam vitae volutpat sapien. Suspendisse sapien odio, iaculis ut ornare eu, tincidunt ac ligula. Mauris viverra interdum quam quis consectetur. Donec aliquet ex nisi, id ullamcorper enim laoreet elementum. Nulla facilisi. Duis feugiat elit eget diam pulvinar laoreet. Proin id varius quam, a consequat nisl. Curabitur imperdiet, lorem sed placerat pulvinar, tortor nunc placerat tortor, sed fringilla sapien nulla sit amet elit. Ut porttitor, dui sed cursus consequat, nisl lacus commodo ante, ut consequat sem nibh ac mi. Nunc bibendum arcu at purus eleifend aliquet. Donec urna ante, malesuada eu mauris quis, sodales pharetra purus. Proin sed elit vitae leo auctor pellentesque. Duis nec pulvinar ante.
+ </p>
+    
+   <div class="form-group row">
+        <div class="col-sm-10 text-center">
+
+             <button id="loanPaidButton" class="btn btn-success" name="page" value="loanPaidSubmit">Pay</button>
+            
+        </div>
+        </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+
+function isInputNumber(evt){
+	var ch = String.fromCharCode(evt.which);
+	if(!(/[0-9]/.test(ch)))
+		evt.preventDefault();
+}
+
+function validate(){
+	var d = document.getElementById("bandNumber").value;
+	var e = document.getElementById("bandAmount").value;
+if(d==''){
+	//alert("1");
+		document.getElementById("bandCheck").innerHTML="Please enter your e-number";
+		 document.getElementById("bandCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("bandCheck").style.display='none';
+	}  
+	if(e==''){
+		//alert("2");
+		document.getElementById("bandAmountCheck").innerHTML="Please enter amount";
+		 document.getElementById("bandAmountCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("bandAmountCheck").style.display='none';
+	}  
+	if(document.getElementById("bandAmountCheck").style.display=='none' && document.getElementById("bandCheck").style.display=='none' )
+		save();
+		} 
+
+function save(){
+		var bandNumber= $("#bandNumber").val();
+		var amount= $("#bandAmount").val();
+		
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?BandNumber='+bandNumber+'&BandAmount='+amount+'&page=broadBandSubmit',
+			success: function(result){
+				$("#SuccessMsg").html(result);
+			} 
+		});
+}
+       </script>
+</body>
+</html>

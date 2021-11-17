@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Transaction-Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+
+<div>
+   <div id="SuccessMsgs" style="color:green"></div>
+     <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Amount</label>
+        <div class="col-sm-6">
+            <input type="text" name = "amount" class="form-control" onkeypress="isInputNumber(event)" id="amount" placeholder="Enter Amount" required>
+            <p id="amountCheck" style="color:red" ></p>
+        </div>
+    </div>
+    
+  
+    <div class="form-group row">
+        <label for="accountNumber" class="col-sm-2 col-form-label">Receiver Account Number</label>
+        <div class="col-sm-6">
+            <input type="text" name="receiverAccountNumber" onkeypress="isInputNumber(event)" class="form-control" id="receiverAccountNumber" placeholder="Enter receiver Account Number" required>
+            <p id="accNumCheck" style="color:red" ></p>
+        </div>
+    </div>
+     
+  
+
+    
+     <br>
+        <div class="form-group row">
+
+            <a href="https://www.zoho.com/">Terms and Conditions</a>
+
+        </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-6 text-center">
+            <button id=transactionBtn class="btn btn-primary" onclick = "validate()" name="page" value="transactionSubmit">Submit</button>
+        </div>
+       <!--  <div class="col-sm-6 text-center">
+            <button type="submit" class="btn btn-warning">Reset</button>
+        </div> -->
+    </div>
+
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+function isInputNumber(evt){
+	var ch = String.fromCharCode(evt.which);
+	if(!(/[0-9]/.test(ch)))
+		evt.preventDefault();
+}
+
+
+function validate(){
+	var c = document.getElementById("amount").value;
+	var d = document.getElementById("receiverAccountNumber").value;
+	if(c==''){
+		
+		document.getElementById("amountCheck").innerHTML="Please enter Amount";
+		 document.getElementById("amountCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("amountCheck").style.display='none';
+	} 
+if(d==''){
+		
+		document.getElementById("accNumCheck").innerHTML="Please enter Amount";
+		 document.getElementById("accNumCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("accNumCheck").style.display='none';
+	} 
+	
+	if(document.getElementById("accNumCheck").style.display=='none' && document.getElementById("amountCheck").style.display=='none'){
+		
+		save();
+		   
+	}
+		} 
+
+
+function save(){
+	var amount = $("#amount").val();
+	var receiverAccountNumber = $("#receiverAccountNumber").val();
+	
+	$.ajax({
+		type:'POST',
+		url:'MyServlett?amount='+amount+'&receiverAccountNumber='+receiverAccountNumber+'&page=transactionSubmit',
+		success: function(result){
+			alert(result);
+			$("#SuccessMsgs").html(result);
+			
+		} 
+	});
+}
+
+
+
+
+
+</script>
+</body>
+</html>

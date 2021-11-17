@@ -1,0 +1,97 @@
+<!-- <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+    
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Account-Details</title>
+</head>
+<body>
+<%@ include file = "header.jsp" %>
+  <%@ include file = "sidenav.jsp" %>
+      <div class="main">
+  
+  <table border = "1" width = "100%">
+         <tr>
+            <th>Id</th>
+            
+            <th>Account Number</th>
+            <th>Process</th>
+              <th>Balance</th>
+              <th>Timing</th>
+         </tr>
+         
+         <c:forEach items = "${output}" var = "row">
+            <tr>
+               <td>${row.id}</td>
+                
+                   <td>${row.accountNumber}</td>
+                    <td> ${row.process}</td>
+                     <td>${row.amount}</td>
+                     <td>${row.date}</td>
+         
+            </tr>
+         </c:forEach>
+      </table>
+      <br><br>
+  
+</div>
+<%@ include file = "footer.jsp" %>
+Account
+</body>
+</html> -->
+
+
+ <div style="margin-left:175px;">
+        <h5>All Transactions</h5>
+    <table style="border-collapse: collapse;" id="one" width=100%>
+    <thead>
+    <tr>
+    <th>Account Number</th>
+    <th>Process</th>
+    <th>Amount</th>
+    <th>Date</th>
+    </tr>
+    </thead>
+    <tbody id="historyInfo">
+    </tbody>
+    </table>
+    
+            
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+//document.getElementById("accountData").click();
+$(document).ready(function(){
+	
+
+	
+
+		$.ajax({
+			type:'GET',
+			url:'MyServlett?page=history',
+			success: function(result){
+				//alert(result);
+				
+				result=JSON.parse(result);
+
+				var main ="";
+	            for (i = 0; i < result.length; i++){
+	              main += "<tr style='border-bottom: 1px solid #ddd;><td>"+result[i].accountNumber+"</td><td>"+result[i].process+"</td><td>"+result[i].amount+"</td><td>"+result[i].date+"</td></tr>";
+	            }
+	            
+	           
+	            $("#historyInfo").html(main);
+	            
+			}
+	});
+});
+
+	
+</script>
+    
+
+

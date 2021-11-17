@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+     <script type="text/javascript" 
+     src="https://code.jquery.com/jquery-3.5.1.js">
+     </script>
+    <!--  <script>
+     $(function(){
+    	 $('#header').load("HeaderWelcome.html");
+    	
+     });
+     </script> -->
+  <style>
+
+html{
+  height:100%
+}
+body{
+  height:100%;
+}
+.intro{
+  height:100%
+}
+
+.left{
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color:#3d231b;
+  height : 100%;
+  color : #FFF;
+
+}
+.right{
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color:#FFF;
+  height : 100%;
+  color : #3d231b;
+}
+@media (max-width: 1200px) { 
+  .left{
+    height:50%
+  }
+  .right{
+    height:50%
+  }
+}
+.about{
+  display : flex;
+  justify-content : center;
+  align-items : center;
+  background-color:#000;
+  color : #FFF;
+  height:100%
+}
+</style>
+  
+</head>
+<body>
+<div id="header">
+<nav class="navbar navbar-light bg-light" >
+    <a class="navbar-brand" href="#"><b>Z</b><i>Pay</i>
+    </a>
+    <div id="btns">
+    <button id="homeBtn" class="btn btn-primary " >Home</button>&nbsp;
+   <button id="loginBtn" class="btn btn-primary " >Login</button>&nbsp;
+    <button id="registerBtn" class="btn btn-primary " >Register</button>
+    </div>
+    
+ 
+</nav>
+</div>
+
+
+
+ <div class="index"  id="login"></div>
+ <div class="index" id="registers"></div>
+   <div class="index"  id="admin"></div>
+   
+ <div class="index container" id="content">
+
+ <p>
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam euismod malesuada auctor. Nullam elementum elit felis, in convallis nisl volutpat vitae. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Nulla facilisi. Pellentesque vel cursus elit. In euismod ex sed nisi rhoncus, sit amet ultrices sem tincidunt. Fusce pulvinar ex quis dui sollicitudin tincidunt. Etiam metus lorem, venenatis ac erat nec, dapibus semper arcu. Suspendisse auctor massa quis neque molestie, non accumsan nisl vulputate. Vestibulum sed euismod quam.
+
+Etiam porttitor ipsum sollicitudin ipsum dictum tincidunt. Aenean ullamcorper libero id blandit posuere. Cras accumsan tincidunt justo, id lobortis massa feugiat ut. Suspendisse elit sem, ultricies id sodales tempor, auctor eu risus. Curabitur in elementum diam, vel vulputate diam. Pellentesque porttitor eget elit non finibus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae;
+
+consectetur. Etiam vitae volutpat sapien. Suspendisse sapien odio, iaculis ut ornare eu, tincidunt ac ligula. Mauris viverra interdum quam quis consectetur. Donec aliquet ex nisi, id ullamcorper enim laoreet elementum. Nulla facilisi. Duis feugiat elit eget diam pulvinar laoreet. Proin id varius quam, a consequat nisl. Curabitur imperdiet, lorem sed placerat pulvinar, tortor nunc placerat tortor, sed fringilla sapien nulla sit amet elit. Ut porttitor, dui sed cursus consequat, nisl lacus commodo ante, ut consequat sem nibh ac mi. Nunc bibendum arcu at purus eleifend aliquet. Donec urna ante, malesuada eu mauris quis, sodales pharetra purus. Proin sed elit vitae leo auctor pellentesque. Duis nec pulvinar ante.
+ </p>
+
+
+  <!--   <div>
+    <button id="adminBtn"> Admin</button>
+   </div> -->
+   
+ </div>
+
+
+<div id="footer"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+
+
+ $(document).ready(function(){
+	 
+	 $("#homeBtn").click(function(){
+			
+			$(".index").hide();
+			//$("#admin").load("sidenav.html");
+			$("#content").show();
+		
+});
+
+	 $("#registerBtn").click(function(){
+			
+			$(".index").hide();
+			
+			$("#registers").load("AddCustomer.html");
+			$("#registers").show();
+			
+		
+	}); 
+	
+	/* $("#adminBtn").click(function(){
+		
+				$(".index").hide();
+				$("#admin").load("sidenav.html");
+				$("#admin").show();
+			
+	}); */
+	
+	
+	 $("#loginBtn").click(function(){
+		
+		$(".index").hide();
+		
+		$("#login").load("Login.html");
+		$("#login").show();
+		
+	
+}); 
+	
+ 
+	
+	
+});
+
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

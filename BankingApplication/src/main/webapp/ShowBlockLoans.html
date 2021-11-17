@@ -1,0 +1,186 @@
+<!-- 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Show Blocked loans</title>
+</head>
+<body>
+
+      <div class="main">
+  
+  <table border = "1" width = "100%">
+         <tr>
+            <th>Id</th>
+            <th>Bank Name</th>
+            <th>Account NUmber</th>
+              <th>Balance</th>
+              <th>Un Block</th>
+         </tr>
+         
+         <c:forEach items = "${output}" var = "row">
+            <tr>
+               <td>${row.id}</td>
+                 <td> ${row.bankName}</td>
+                   <td>${row.accountNumber}</td>
+                     <td>${row.balance}</td>
+                      <td><a href="http://localhost:8080/BankingApplication/MyServlett?page=loanReject&accountNumber=${row.accountNumber}" id="rejectBtn">UnBlock</a>
+
+                    
+            </td>
+                	
+            </tr>
+         </c:forEach>
+      </table>
+      <br><br>
+     
+ 
+</div>
+
+
+</body>
+</html> -->
+
+<div style="margin-left:175px;">
+        <h5>Blocked Loans</h5>
+    
+    <div id="blockLoanInfo"></div>
+            
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+function reject(x){
+	var accountNumber=x;
+	$.ajax({
+		type:'GET',
+		url:'MyServlett?accountNumber='+accountNumber+'&page=loanReject',
+		success: function(result){
+			
+			$.ajax({
+				type:'GET',
+				url:'MyServlett?page=blockLoansList',
+				success: function(result){
+					//alert(result);
+					
+					result=JSON.parse(result);
+					var tbltop = "<table style='border-collapse: collapse;' id='one' width=100%><tr><th>Id</th><th>Bank Name</th><th>Acc Number</th><th>Balance</th><th>Loan</th><th>Approve</th><th>Reject</th><th>WaitingList</th></tr>";
+
+					var main ="";
+		            for (i = 0; i < result.length; i++){
+		              main += "<tr style='border-bottom: 1px solid #ddd;'><td>"+result[i].id+"</td><td>"+result[i].bankName+"</td><td>"+result[i].accountNumber+"</td><td>"+result[i].balance+"</td><td>"+result[i].loanAmount+"</td><td><button id='approveBtn'onclick=approve(this.value);  value='"+result[i].accountNumber+"' >Approve</button></td><td><button id='rejectBtn' onclick=reject(this.value);  value='"+result[i].accountNumber+"' >Reject</button></td> <td><button id='waitingListBtn' onclick=waitingList(this.value);  value='"+result[i].accountNumber+"' >Waiting List</button></td></tr>";
+		            	
+		            }
+		            var end = "</table>"
+		            var tbl = tbltop+ main + end;
+		            $("#blockLoanInfo").html(tbl);
+				}
+		});
+			
+		}
+});
+}
+
+function waitingList(x){
+	var accountNumber=x;
+	$.ajax({
+		type:'GET',
+		url:'MyServlett?accountNumber='+accountNumber+'&page=loanWaitingList',
+		success: function(result){
+			
+			$.ajax({
+				type:'GET',
+				url:'MyServlett?page=blockLoansList',
+				success: function(result){
+					//alert(result);
+					
+					result=JSON.parse(result);
+					var tbltop = "<table style='border-collapse: collapse;' id='one' width=100%><tr><th>Id</th><th>Bank Name</th><th>Acc Number</th><th>Balance</th><th>Loan</th><th>Approve</th><th>Reject</th><th>WaitingList</th></tr>";
+
+					var main ="";
+		            for (i = 0; i < result.length; i++){
+		              main += "<tr style='border-bottom: 1px solid #ddd;'><td>"+result[i].id+"</td><td>"+result[i].bankName+"</td><td>"+result[i].accountNumber+"</td><td>"+result[i].balance+"</td><td>"+result[i].loanAmount+"</td><td><button id='approveBtn'onclick=approve(this.value);  value='"+result[i].accountNumber+"' >Approve</button></td><td><button id='rejectBtn' onclick=reject(this.value);  value='"+result[i].accountNumber+"' >Reject</button></td> <td><button id='waitingListBtn' onclick=waitingList(this.value);  value='"+result[i].accountNumber+"' >Waiting List</button></td></tr>";
+		            	
+		            }
+		            var end = "</table>"
+		            var tbl = tbltop+ main + end;
+		            $("#blockLoanInfo").html(tbl);
+				}
+		});
+			
+		}
+});
+}
+
+function approve(x){
+	var accountNumber=x;
+	$.ajax({
+		type:'GET',
+		url:'MyServlett?accountNumber='+accountNumber+'&page=loanApprove',
+		success: function(result){
+			
+			$.ajax({
+				type:'GET',
+				url:'MyServlett?page=blockLoansList',
+				success: function(result){
+					//alert(result);
+					
+					result=JSON.parse(result);
+					var tbltop = "<table style='border-collapse: collapse;' id='one' width=100%><tr><th>Id</th><th>Bank Name</th><th>Acc Number</th><th>Balance</th><th>Loan</th><th>Approve</th><th>Reject</th><th>WaitingList</th></tr>";
+
+					var main ="";
+		            for (i = 0; i < result.length; i++){
+		              main += "<tr style='border-bottom: 1px solid #ddd;'><td>"+result[i].id+"</td><td>"+result[i].bankName+"</td><td>"+result[i].accountNumber+"</td><td>"+result[i].balance+"</td><td>"+result[i].loanAmount+"</td><td><button id='approveBtn'onclick=approve(this.value);  value='"+result[i].accountNumber+"' >Approve</button></td><td><button id='rejectBtn' onclick=reject(this.value);  value='"+result[i].accountNumber+"' >Reject</button></td> <td><button id='waitingListBtn' onclick=waitingList(this.value);  value='"+result[i].accountNumber+"' >Waiting List</button></td></tr>";
+		            	
+		            }
+		            var end = "</table>"
+		            var tbl = tbltop+ main + end;
+		            $("#blockLoanInfo").html(tbl);
+				}
+		});
+		}
+});
+}
+
+
+
+$(document).ready(function(){
+
+		$.ajax({
+			type:'GET',
+			url:'MyServlett?page=blockLoansList',
+			success: function(result){
+				//alert(result);
+				
+				result=JSON.parse(result);
+				var tbltop = "<table style='border-collapse: collapse;' id='one' width=100%><tr><th>Id</th><th>Bank Name</th><th>Acc Number</th><th>Balance</th><th>Loan</th><th>Approve</th><th>Reject</th><th>WaitingList</th></tr>";
+
+				var main ="";
+	            for (i = 0; i < result.length; i++){
+	              main += "<tr style='border-bottom: 1px solid #ddd;'><td>"+result[i].id+"</td><td>"+result[i].bankName+"</td><td>"+result[i].accountNumber+"</td><td>"+result[i].balance+"</td><td>"+result[i].loanAmount+"</td><td><button id='approveBtn'onclick=approve(this.value);  value='"+result[i].accountNumber+"' >Approve</button></td><td><button id='rejectBtn' onclick=reject(this.value);  value='"+result[i].accountNumber+"' >Reject</button></td> <td><button id='waitingListBtn' onclick=waitingList(this.value);  value='"+result[i].accountNumber+"' >Waiting List</button></td></tr>";
+	            	
+	            }
+	            var end = "</table>"
+	            var tbl = tbltop+ main + end;
+	            $("#blockLoanInfo").html(tbl);
+			}
+	});
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

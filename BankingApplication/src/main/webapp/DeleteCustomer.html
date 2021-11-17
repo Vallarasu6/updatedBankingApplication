@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Delete Customer</title>
+</head>
+<body>
+
+
+<div style="margin-left:165px;">
+    
+    <div class="form-group row">
+        <div class="col-sm-6 text-center">
+            <button id=deleteCustomerBtn class="btn btn-primary" name="page" value="DeleteCustomerSubmit">Submit</button>
+        </div>
+        </div>
+        </div>
+       
+       <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+	
+	$("#deleteCustomerBtn").click(function(){
+	
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?page=DeleteCustomerSubmit',
+			success: function(result){
+				if(result=="Succesfully!!"){
+					alert("Customer deleted successfully");
+					window.location.href = "http://localhost:8080/BankingApplication/welcome.jsp";
+				}
+				
+			} 
+		});
+	});
+});
+</script>
+
+</body>
+</html>

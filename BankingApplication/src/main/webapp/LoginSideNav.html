@@ -1,0 +1,406 @@
+  <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer-Details</title>
+  
+
+    <style>
+    .side-bar{
+    background: #f2f2f2;
+   width: 290px;
+   height: 100%;
+   position: fixed;
+   top: 0;
+   left: 0;
+   overflow-y: hidden;
+	margin-top:120px; 
+   
+    }
+    .side-bar .menu{
+    width: 100%;
+    
+     
+    }
+    .side-bar .menu .item{
+    position: relative;
+    cursor: pointer;
+    }
+    .side-bar .menu .item a{
+    color: black;
+    background: #ffe6b3;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    padding : 5px 30px;
+    line-height: 40px;
+    
+    }
+    .side-bar .menu .item a:hover{
+    background: white;
+    transition: 0.3s ease;
+    }
+    
+    .side-bar .menu .item a .dropdown{
+    position: absolute;
+    right:0;
+    margin : 20px;
+     transition: 0.3s ease;
+    
+    
+    }
+    .side-bar .menu .item .sub-menu{
+    background: #ffe6b3;
+    display: none;
+    
+    }
+    .side-bar .menu .item .sub-menu a{
+    padding-left: 80px;
+    }
+    .rotate{
+    transform: rotate(90deg);
+    }
+   
+    
+    </style>
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        </head>
+<body>
+ 
+
+<div class="sidenav">
+<div class="side-bar">
+<div class="menu">
+
+<div class="item" id="accountDropDown"></div>
+
+<!-- <div class="item"><a id="addaccountBtn">Add New Account</a></div>
+ --><div class="item"><a id="withDrawBtn">With Draw</a></div>
+<div class="item"><a id="depositBtn">Deposit</a></div>
+<div class="item"><a id="transactionBtn">Transaction</a></div>
+<!-- <div class="item"><a id="allHistoryBtn">All History</a></div>
+ -->
+ <!-- <a href="#"id="balancebtn">Check Account Balance</a> -->
+ 
+ <div class="item"><a class="sub-btn">Update Profile<i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+<a class="sub-item" id="mobileUpdateBtn">Mobile Num</a>
+<a class="sub-item" id="addressUpdateBtn">Address</a>
+
+</div>
+</div>
+ 
+<!--  
+<div class="item"><select id="update" name="updates" onchange="update(this.value)" style="border:none;">
+<option value="">Update Profile</option>
+<option value="mobile">Mobile Num</option>
+<option value="address">Address</option>
+</select>
+</div> -->
+
+<!-- <div class="item"><a id="clientLoanBtn">Loan</a></div>
+ -->
+<!--  <div class="item"><a href="http://localhost:8080/BankingApplication/MyServlett?page=deleteAccounts">Delete Account</a></div>
+ 
+ <div class="item"><a href="http://localhost:8080/BankingApplication/MyServlett?page=deleteCustomer">Delete Customer</a></div>
+ -->
+ <div class="item"><a class="sub-btn">Recharge<i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+<a class="sub-item" id="mobileRechargeBtn">Mobile Recharge</a>
+<a class="sub-item" id="DTHRechargeBtn">DTH Recharge</a>
+<a class="sub-item" id="electricityBtn">Electricity Bill</a>
+<a class="sub-item" id="broadBandBtn">Broad Band Bill</a>
+<a class="sub-item" id="loanPayBtn">Loan Bill</a>
+
+</div>
+</div>
+
+<!--  <div class="item"><select id="bills" name="Bills" onchange="bills(this.value)" style="border:none;">
+<option value="">Bills and recharge</option>
+
+<option value="mobile">Mobile Recharge</option>
+<option value="dth">DTH</option>
+</select>    
+
+  </div>  --> 
+  <div class="item"><a class="sub-btn">More<i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+<a class="sub-item" id="addaccountBtn">Add New Account</a>
+<a class="sub-item" id="allHistoryBtn">All History</a>
+<a class="sub-item" id="clientLoanBtn">Loan</a>
+<a href="http://localhost:8080/BankingApplication/MyServlett?page=deleteAccounts" class="sub-item">Delete Account</a>
+<a href="http://localhost:8080/BankingApplication/MyServlett?page=deleteCustomer" class="sub-item">Delete Customer</a>
+
+</div>
+</div>
+
+<div class="item"> <a href="http://localhost:8080/BankingApplication/MyServlett?page=logout" id="logout" >Logout</a></div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<div class="container">
+<div id="balance" style="color:green;  margin-left: 800px; "></div>
+
+<div id="accNumId" style="color:green"></div><br>
+<div class="allProcess" id="addAccount"></div>
+<div class="allProcess" id="withDraw"></div>
+<div class="allProcess" id="deposit"></div>
+<div class="allProcess" id="transaction"></div>
+<div class="allProcess" id="allHistory"></div>
+<div class="allProcess" id="mobileUpdate"></div>
+<div class="allProcess" id="addressUpdate"></div>
+<div class="allProcess" id="clientLoan"></div>
+<div class="allProcess" id="mobileRecharge"></div>
+<div class="allProcess" id="dthRecharge"></div>
+<div class="allProcess" id="electricity"></div>
+<div class="allProcess" id="broadBand"></div>
+<div class="allProcess" id="loanPay"></div>
+
+
+
+<p class="allProcess" style="margin-left:175px">orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+</p>
+
+
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+
+
+
+
+function accountNumbers(x){
+	if(x!=''){
+		
+		var y = x;
+		
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?y='+x+'&page=setSessionAccountNumber',
+			success: function(result){
+				//alert("inside acc num set check 113");
+				$("#accNumId").html('Account Number: '+ result);
+			} 
+		});
+		
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?y='+x+'&page=accountBalance',
+			success: function(result){
+				//alert("inside balance check 120");
+				$("#balance").html(result);
+				$("#balance").show();
+				
+				
+			} 
+		
+	}); 
+		
+	}
+}
+
+
+
+
+
+
+$(document).ready(function(){
+	
+	
+	
+	
+	$.ajax({
+		type:'POST',
+		url:'MyServlett?page=setAccountNumber',
+		success: function(result){
+			
+			result=JSON.parse(result);
+			 var tbltop = "<select id='account' name='accounts' onchange='accountNumbers(this.value)' style='border:none;'>";
+
+			var main ="<option>Select Acc Num</option>";
+            for (i = 0; i < result.length; i++){
+            	main+="<option value="+result[i]+">"+result[i]+"</option>"; 
+            }
+            var end = "</select>"
+            var tbl = tbltop+ main + end;
+           
+            $("#accountDropDown").html(tbl);
+		} 
+	});
+	
+	 $(".sub-btn").click(function(){
+			$(this).next(".sub-menu").slideToggle(); 
+			$(this).find(".dropdown").toggleClass("rotate");
+		 });
+	
+	 $("#addaccountBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#addAccount").load("AddAccount.html");
+		 $("#addAccount").show();
+		 $.ajax({
+				type:'POST',
+				url:'MyServlett?page=setAccountNumber',
+				success: function(result){
+					
+					result=JSON.parse(result);
+					 var tbltop = "<select id='account' name='accounts' onchange='accountNumbers(this.value)' style='border:none;'>";
+
+					var main ="<option>Select Acc Num</option>";
+		            for (i = 0; i < result.length; i++){
+		            	main+="<option value="+result[i]+">"+result[i]+"</option>"; 
+		            }
+		            var end = "</select>"
+		            var tbl = tbltop+ main + end;
+		           
+		            $("#accountDropDown").html(tbl);
+				} 
+			});
+		 
+	 });
+	
+	 $("#withDrawBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#withDraw").load("WithDraw.html");
+		 $("#withDraw").show();
+			/* $.ajax({
+				type:'POST',
+				url:'MyServlett?y='+x+'&page=accountBalance',
+				success: function(result){
+					//alert("inside balance check 120");
+					$("#balance").html(result);
+					$("#balance").show();
+					
+					
+				} 
+			
+		});  */
+		 
+	 });
+	 
+	 $("#depositBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#deposit").load("Deposit.html");
+		 $("#deposit").show();
+		 
+		 
+	 });
+	
+	 $("#transactionBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#transaction").load("transaction.html");
+		 $("#transaction").show();
+		
+		 
+	 });
+	 
+	 $("#allHistoryBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#allHistory").load("AllHistory.html");
+		 $("#allHistory").show();
+		
+		 
+	 });
+	 
+	 $("#clientLoanBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#clientLoan").load("ClientLoan.html");
+		 $("#clientLoan").show();
+		
+		 
+	 });
+	 
+	 $("#mobileUpdateBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#mobileUpdate").load("MobileUpdate.html");
+		 $("#mobileUpdate").show();
+		
+		 
+	 });
+	 
+	 $("#addressUpdateBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#addressUpdate").load("AddressUpdate.html");
+		 $("#addressUpdate").show();
+		 
+	 });
+	 
+	 $("#mobileRechargeBtn").click(function(){
+	
+				$(".allProcess").hide();
+				 $("#mobileRecharge").load("MobileRecharge.html");
+				 $("#mobileRecharge").show();
+				
+			
+		 
+	 });
+	 
+	 $("#DTHRechargeBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#dthRecharge").load("DthRecharge.html");
+		 $("#dthRecharge").show();
+		 
+	 });
+	 
+	 $("#electricityBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#electricity").load("ElectricityBill.html");
+		 $("#electricity").show();
+		 
+	 });
+	 
+	
+	 $("#broadBandBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#broadBand").load("broadBandBill.html");
+		 $("#broadBand").show();
+		 
+	 });
+	 
+	 $("#loanPayBtn").click(function(){
+		 $(".allProcess").hide();
+		 $("#loanPay").load("LoanBill.html");
+		 $("#loanPay").show();
+		 
+	 });
+	 
+	});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+

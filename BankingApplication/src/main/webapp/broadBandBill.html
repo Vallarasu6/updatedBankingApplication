@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Broad Band</title>
+</head>
+<body>
+
+  <div>
+     <div id="SuccessMsg" style="color:green"></div>
+  
+<div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Broad Band Number</label>
+        <div class="col-sm-6">
+            <input type="text" name = "BandNumber" class="form-control"  onkeypress="isInputNumber(event)" id="bandNumber" placeholder="Enter your broad band number" required>
+            <p id="bandCheck" style="color:red" ></p>        
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Amount</label>
+        <div class="col-sm-6">
+            <input type="text" name = "BandAmount" class="form-control" onkeypress="isInputNumber(event)" id="bandAmount" placeholder="Enter amount" required>
+        <p id="bandAmountCheck" style="color:red" ></p> 
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <div class="col-sm-6 text-center">
+            <button id="broadBandBtn" onclick = "validate()" class="btn btn-primary" name="page" value="broadBandSubmit">Submit</button>
+        </div>
+        </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+
+function isInputNumber(evt){
+	var ch = String.fromCharCode(evt.which);
+	if(!(/[0-9]/.test(ch)))
+		evt.preventDefault();
+}
+
+function validate(){
+	var d = document.getElementById("bandNumber").value;
+	var e = document.getElementById("bandAmount").value;
+if(d==''){
+	//alert("1");
+		document.getElementById("bandCheck").innerHTML="Please enter your e-number";
+		 document.getElementById("bandCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("bandCheck").style.display='none';
+	}  
+	if(e==''){
+		//alert("2");
+		document.getElementById("bandAmountCheck").innerHTML="Please enter amount";
+		 document.getElementById("bandAmountCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("bandAmountCheck").style.display='none';
+	}  
+	if(document.getElementById("bandAmountCheck").style.display=='none' && document.getElementById("bandCheck").style.display=='none' )
+		save();
+		} 
+
+function save(){
+		var bandNumber= $("#bandNumber").val();
+		var amount= $("#bandAmount").val();
+		
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?BandNumber='+bandNumber+'&BandAmount='+amount+'&page=broadBandSubmit',
+			success: function(result){
+				$("#SuccessMsg").html(result);
+			} 
+		});
+}
+       </script>
+</body>
+</html>

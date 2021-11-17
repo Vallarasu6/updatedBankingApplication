@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Mobile number</title>
+</head>
+<body>
+
+  <div>
+   <div id="SuccessMsg" style="color:green"></div>
+     <div id="oldNumber"></div><br>
+<div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">New Mobile Number</label>
+        <div class="col-sm-6">
+            <input type="text" name = "mobileUpdate" class="form-control" id="mobile_update" placeholder="Enter mobile number"  required>
+            <p id="mobileCheck" style="color:red" ></p>
+        </div>
+    </div>
+    
+    
+    <div class="form-group row">
+        <div class="col-sm-6 text-center">
+            <button id="mobileUpdateBtn" class="btn btn-primary" onclick = "validate()" name="page" value="mobileUpdateSubmit">Submit</button>
+        </div>
+        </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+	//$('#mobile_update')
+	
+	$.ajax({
+		type:'POST',
+		url:'MyServlett?page=oldMobile',
+		success: function(result){
+			 /* alert(result);  */
+			 $('#oldNumber').html("Mobile Number: "+result);
+		} 
+	});
+	
+	
+	
+	
+});
+function validate(){
+	
+	
+	
+	
+	var b = document.getElementById("mobile_update").value;
+if(b==''){
+		
+		document.getElementById("mobileCheck").innerHTML="Please enter your mobile number";
+		 document.getElementById("mobileCheck").style.display='block';
+	}
+else if(b.length!=10){
+	
+	document.getElementById("mobileCheck").innerHTML="Mobile number must be 10 digit";
+ 	document.getElementById("mobileCheck").style.display='block';
+}
+	else{
+		document.getElementById("mobileCheck").style.display='none';
+	} 
+if( document.getElementById("mobileCheck").style.display=='none')
+	save();
+}
+	
+	
+     function save(){
+		var mobileNumNew = $("#mobile_update").val();
+		
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?mobileUpdate='+mobileNumNew+'&page=mobileUpdateSubmit',
+			success: function(result){
+				$("#SuccessMsg").html(result);
+			} 
+		});
+     }
+     
+     
+     
+       </script>
+</body>
+</html>

@@ -1,0 +1,383 @@
+  <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Customer-Details</title>
+
+
+    <style>
+    .side-bar{
+    background:  #ffe6b3;
+   width: 290px;
+   height: 100%;
+   position: fixed;
+   top: 0;
+   left: 0;
+   overflow-y: hidden;
+	margin-top:120px; 
+   
+    }
+    .side-bar .menu{
+    width: 100%;
+    
+     
+    }
+    .side-bar .menu .item{
+    position: relative;
+    cursor: pointer;
+    }
+    .side-bar .menu .item a{
+    color: black;
+    background:  #ffe6b3;
+    font-size: 16px;
+    text-decoration: none;
+    display: block;
+    padding : 5px 30px;
+    line-height: 40px;
+    
+    }
+    .side-bar .menu .item a:hover{
+    background: rgb(255, 255, 255);
+    transition: 0.3s ease;
+    }
+    
+    .side-bar .menu .item a .dropdown{
+    position: absolute;
+    right:0;
+    margin : 20px;
+     transition: 0.3s ease;
+    
+    
+    }
+    .side-bar .menu .item .sub-menu{
+    background: #ffe6b3;
+    display: none;
+    
+    }
+    .side-bar .menu .item .sub-menu a{
+    padding-left: 80px;
+    }
+    .rotate{
+    transform: rotate(90deg);
+    }
+    .box{
+      width: 320px;
+  padding: 10px;
+  border: 5px ;
+  color:rgb(0, 0, 0);
+  background-color:rgb(255, 255, 255) ; 
+  margin: 0;
+  box-shadow: 2px 3px #888888;
+    }
+    
+    .count {
+  position: absolute;
+  top: 10px;
+  padding: 5px 10px;
+  border-radius: 20%;
+  background-color:#75a3a3;
+  color: white;
+}
+   span.small {
+  font-size: smaller;
+}
+    </style>
+    
+    <link rel="stylesheet"  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    
+   
+    
+     </head>
+<body>
+
+<div id="header"></div>
+
+<div class="sidenav">
+<div class="side-bar">
+<div class="menu">
+
+<!-- <div class="item"><a id="homeBtn">Home</a></div> -->
+<div class="item"><a id="customerBtn">Customer <span class="position-absolute badge rounded-pill bg-success" id="notify"></span></a></div>
+<div class="item"><a id="accountBtn">Account</a></div>
+<div class="item"><a id="inActiveCustomerBtn">InActive Customer</a></div>
+<div class="item"><a id="inActiveAccountBtn">InActive Account</a></div>
+<div class="item"><a id="allHistoriesBtn">All History</a></div>
+<div class="item"><a id="appliedLoansBtn">Applied Loans <span class="position-absolute badge rounded-pill bg-success" id="notifyLoan"></a></div>
+<div class="item"><a id="approvedLoansBtn">Approved Loans</a></div>
+<div class="item"><a id="waitingListLoansBtn">Waiting List Loans</a></div>
+<div class="item"><a id="blockLoansBtn">Block List</a></div>
+<!-- <div class="item"><a href="http://localhost:8080/BankingApplication/MyServlett?page=waitingLoansList">Waiting List</a></div>
+ -->
+<!--  <div class="item"><a href="http://localhost:8080/BankingApplication/MyServlett?page=blockLoansList">Block List</a></div>
+ --><div class="item"><a class="sub-btn">More<i class="fas fa-angle-right dropdown"></i></a>
+<div class="sub-menu">
+<a class="sub-item">Coming soon</a>
+<a class="sub-item">Coming soon</a>
+<a class="sub-item">Coming soon</a>
+
+</div>
+</div>
+<div class="item"> <a href="http://localhost:8080/BankingApplication/MyServlett?page=logout" id="logout" >Logout</a></div>
+
+</div>
+</div>
+</div>
+<!-- <div class="adminProcess" id="home"></div>
+ -->
+ <div style="margin-left:175px">
+
+
+<div class="adminProcess" id="customer"></div>
+<div class="adminProcess" id="account"></div>
+<div class="adminProcess" id="inActiveCustomer"></div>
+<div class="adminProcess" id="inActiveAccount"></div>
+<div class="adminProcess" id="allHistories"></div>
+<div class="adminProcess" id="appliedLoans"></div>
+<div class="adminProcess" id="approvedLoans"></div>
+<div class="adminProcess" id="waitingListLoans"></div>
+<div class="adminProcess" id="blockLoans"></div>
+<input type="hidden" id="pageNumber" value="">
+<!-- <button type="button" class="btn btn-primary adminProcess">Primary <span class="badge">7</span></button>
+  <button type="button" class="btn btn-success adminProcess">Success <span class="badge">3</span></button> --> 
+  <br><br>
+  <div class="container adminProcess">
+  <div class="row justify-content-around">
+    <div class="col-4 box" id="customerCount">
+     </div>   
+   <div class="col-4 box" id="accountCount">
+      
+    </div>
+  </div><br>
+  <div class="row justify-content-around">
+    <div class="col-4 box" id="InActiveCustomerCount">
+     
+    </div>
+    <div class="col-4 box" id="InActiveAccountCount">
+      
+    </div>
+  </div><br>
+  <div class="row justify-content-around">
+    <div class="col-4 box" id="historyCount">
+      
+    </div>
+    <div class="col-4 box" id="appliedCount">
+      
+    </div>
+  </div><br>
+  <div class="row justify-content-around">
+    <div class="col-4 box" id="approvedCount">
+      
+    </div>
+    <div class="col-4 box" id="waitingListCount">
+      
+    </div>
+  </div><br>
+   <div class="row justify-content-around">
+    <div class="col-4 box" id="blockedCount">
+     
+    </div>
+    <div class="col-4 box" id=more>
+      
+    </div>
+    
+  </div>
+  </div><br><br>
+<p class="adminProcess" style="margin-left:175px">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+
+Why do we use it?
+It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+
+
+Where does it come from?
+Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+</p>
+
+</div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    
+<script>
+
+ $(document).ready(function(){
+	 
+		$.ajax({
+			type:'GET',
+			url:'MyServlett?page=notification',
+			success: function(result){
+				if(result>0){
+				$("#notify").html(result);
+				}else{
+					$("#notify").hide();
+				}
+			}
+	});
+		
+		$.ajax({
+			type:'GET',
+			url:'MyServlett?page=notificationLoan',
+			success: function(result){
+				if(result>0){
+				$("#notifyLoan").html(result);
+				}else{
+					$("#notifyLoan").hide();
+				}
+			}
+	});
+		$.ajax({
+			type:'GET',
+			url:'MyServlett?page=labelData',
+			success: function(result){
+			result=JSON.parse(result);
+				//alert(result);
+				$("#pageNumber").val(result[0]);
+			$("#customerCount").html(result[0]+" <span class='small'>Customers</span>");
+			$("#accountCount").html(result[1]+" <span class='small'>Accounts</span>");
+			$("#InActiveCustomerCount").html(result[2]+" <span class='small'>In Active Customers</span>");
+			$("#InActiveAccountCount").html(result[3]+" <span class='small'>In Active Accounts</span>");
+			$("#historyCount").html(result[4]+" <span class='small'>History</span>");
+			$("#appliedCount").html(result[5]+" <span class='small'>Loan Applied</span>");
+			$("#approvedCount").html(result[6]+" <span class='small'>Loan Approved</span>");
+			$("#waitingListCount").html(result[7]+" <span class='small'>Waiting List Loans</span>");
+			$("#blockedCount").html(result[8]+" <span class='small'>Blocked Loans</span>");
+			$("#more").html("More...");
+				
+			}
+	});
+	
+	 
+	 
+	 $(".sub-btn").click(function(){
+		$(this).next(".sub-menu").slideToggle(); 
+		$(this).find(".dropdown").toggleClass("rotate");
+	 });
+	 
+  /*   	
+	 $("#homeBtn").click(function(){
+		 $(".sidenav").hide();
+		 $(".adminProcess").hide();
+			
+			 
+			 $("#home").load("welcome.html");
+			 $("#home").show();
+			 
+		}); 
+	  */
+	 
+	 
+	 $("#customerBtn").click(function(){
+		 $(".adminProcess").hide();
+			
+		 $("#customer").load("customer.html");
+		 $("#customer").show();
+		 $("#notify").hide();
+			$.ajax({
+				type:'POST',
+				url:'MyServlett?page=notificationUpdate',
+				success: function(result){
+					//dont remove
+					
+				}
+		});
+	 });
+			
+			
+	$("#accountBtn").click(function(){
+		$(".adminProcess").hide();
+		 $("#account").load("account.html");
+		 $("#account").show();
+		
+	}); 
+	
+	
+	$("#inActiveCustomerBtn").click(function(){
+		$(".adminProcess").hide();
+		 $("#inActiveCustomer").load("ViewDeleteCustomer.html");
+		 
+		 $("#inActiveCustomer").show();
+		
+	}); 
+	$("#inActiveAccountBtn").click(function(){
+		$(".adminProcess").hide();
+		 $("#inActiveAccount").load("ViewDeleteAccounts.html");
+		 
+		 $("#inActiveAccount").show();
+		
+	}); 
+	
+$("#allHistoriesBtn").click(function(){
+	$(".adminProcess").hide();
+		 
+		 $("#allHistories").load("History.html");
+		 
+		 $("#allHistories").show();
+	}); 
+	
+$("#appliedLoansBtn").click(function(){
+	$(".adminProcess").hide();
+	 
+	 $("#appliedLoans").load("ShowAppliedLoans.html");
+	 
+	 $("#appliedLoans").show();
+	 $("#notifyLoan").hide();
+	 $.ajax({
+			type:'POST',
+			url:'MyServlett?page=notificationLoanUpdate',
+			success: function(result){
+				
+				
+			}
+	});
+	 
+}); 
+
+
+$("#approvedLoansBtn").click(function(){
+	$(".adminProcess").hide();
+	 
+	 $("#approvedLoans").load("ShowApprovedLoans.html");
+	 
+	 $("#approvedLoans").show();
+}); 
+
+$("#waitingListLoansBtn").click(function(){
+	
+	$(".adminProcess").hide();
+	 
+	 $("#waitingListLoans").load("ShowWaitingLoans.html");
+	 
+	 $("#waitingListLoans").show();
+}); 
+
+$("#blockLoansBtn").click(function(){
+	
+	$(".adminProcess").hide();
+	 
+	 $("#blockLoans").load("ShowBlockLoans.html");
+	 
+	 $("#blockLoans").show();
+}); 
+	
+	});
+
+</script>
+</body>
+</html>

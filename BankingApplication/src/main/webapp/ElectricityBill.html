@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Electricity</title>
+</head>
+<body>
+
+  <div>
+     <div id="SuccessMsg" style="color:green"></div>
+  
+<div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Electricity Number</label>
+        <div class="col-sm-6">
+            <input type="text" name = "ENumber" class="form-control"  onkeypress="isInputNumber(event)" id="enumber" placeholder="Enter your electricity number" required>
+            <p id="eCheck" style="color:red" ></p>        
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Amount</label>
+        <div class="col-sm-6">
+            <input type="text" name = "Amount" class="form-control" onkeypress="isInputNumber(event)" id="amounts" placeholder="Enter amount" required>
+        <p id="amountsCheck" style="color:red" ></p> 
+        </div>
+    </div>
+    
+    <div class="form-group row">
+        <div class="col-sm-6 text-center">
+            <button id="electricityBtn" onclick = "validate()" class="btn btn-primary" name="page" value="electricitySubmit">Submit</button>
+        </div>
+        </div>
+</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script>
+
+function isInputNumber(evt){
+	var ch = String.fromCharCode(evt.which);
+	if(!(/[0-9]/.test(ch)))
+		evt.preventDefault();
+}
+
+function validate(){
+	var d = document.getElementById("enumber").value;
+	var e = document.getElementById("amounts").value;
+if(d==''){
+	//alert("1");
+		document.getElementById("eCheck").innerHTML="Please enter your e-number";
+		 document.getElementById("eCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("eCheck").style.display='none';
+	}  
+	if(e==''){
+		//alert("11");
+		document.getElementById("amountsCheck").innerHTML="Please enter amount";
+		 document.getElementById("amountsCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("amountsCheck").style.display='none';
+	}  
+	if(document.getElementById("amountsCheck").style.display=='none' && document.getElementById("eCheck").style.display=='none' )
+		save();
+		} 
+
+function save(){
+		var enumber= $("#enumber").val();
+		var amount= $("#amounts").val();
+		
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?ENumber='+enumber+'&Amount='+amount+'&page=electricitySubmit',
+			success: function(result){
+				$("#SuccessMsg").html(result);
+			} 
+		});
+}
+       </script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+
+
+
+    <div style="margin-left:175px;">
+    <h5>In-Active Customers Details</h5>
+    
+    
+    
+    
+    
+    <div id="inActiveCustomer"></div>
+    
+           <table style="border-collapse: collapse;" id="one"  width=100%>
+           <thead>
+           <tr>
+           <th>Id</th>
+           <th>Name</th>
+           <th>Mobile</th>
+           </tr>
+           </thead>
+           <tbody id="inActiveCustomerInfo">
+		</tbody>
+		</table>
+		<button id="reNewCustomerBtn">re-New Customer </button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href=
+"https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+<script type="text/javascript" src=
+"https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+     </script>
+<script>
+//document.getElementById("accountData").click();
+$(document).ready(function(){
+	
+
+	
+
+		$.ajax({
+			type:'GET',
+			url:'MyServlett?page=inActiveCustomer',
+			success: function(result){
+				//alert(result);
+				
+				result=JSON.parse(result);
+
+				var main ="";
+	            for (i = 0; i < result.length; i++){
+	              main += "<tr style='border-bottom: 1px solid #ddd;'><td>"+result[i].id+"</td><td>"+result[i].name+"</td><td>"+result[i].mobileNumber+"</td></tr>";
+	            }
+	            
+	           
+	            $("#inActiveCustomerInfo").html(main);
+	            $('#one').DataTable({ });
+			}
+	});
+		
+		
+		$("#reNewCustomerBtn").click(function(){
+			
+			$("#inActiveCustomerInfo").hide();
+			$("#inActiveCustomer").load("RenewOldCustomer.html");
+			$("#inActiveCustomer").show();
+		});
+});
+
+	
+</script>
+    
+    
+    
+
+
+
+
+

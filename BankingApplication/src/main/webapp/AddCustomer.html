@@ -1,0 +1,260 @@
+
+
+<html>
+<head>
+<title>Welcome</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+
+<div>
+
+<div class="container">
+    <div class="text-center">
+    <h2>REGISTRATION FORM</h2></div>
+<!-- 
+<form action="MyServlett" method="POST"> -->
+   <div id="SuccessMsg" style="color:green"></div>
+   <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Name</label>
+        <div class="col-sm-10">
+            <input type="text" name = "Name" class="form-control" id="name" placeholder="Enter your name" >
+           <p id="nameCheck" style="color:red" ></p>
+        </div>
+    </div>
+     <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Mobile</label>
+        <div class="col-sm-10">
+            <input type="text"  maxlength="10" name = "mobile" class="form-control"  onkeypress="isInputNumber(event)" id="mobile" placeholder="Enter your mobile number">
+            <p id="mobileCheck" style="color:red" ></p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="name" class="col-sm-2 col-form-label">Bank Name</label>
+        <div class="col-sm-10">
+            <input type="text" name = "bankname" class="form-control" id="bankName" placeholder="Enter your bank name" >
+            <p id="bankCheck" style="color:red" ></p>
+            
+        </div>
+    </div>
+ 
+     <div class="form-group row">
+        <label for="balance" class="col-sm-2 col-form-label">Balance</label>
+        <div class="col-sm-10">
+            <input type="text" name="balance" class="form-control" onkeypress="isInputNumber(event)" id="balance" placeholder="Enter your balance" >
+            <p id="balanceCheck" style="color:red" ></p>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="address" class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+            <textarea rows="4" cols="100" name="Address" class="form-control" id="address"></textarea>
+            <p id="addressCheck" style="color:red" ></p>
+            
+        </div>
+    </div>
+     <div class="form-group row">
+        <label for="password" class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" name="Password" class="form-control" onkeypress="myfunction()"  id="password" placeholder="Enter your password" >
+            <p id="passwordCheck" style="color:red" ></p>
+            
+        </div>
+    </div>
+  <div class="form-group row">
+        <label for="confirm_password" class="col-sm-2 col-form-label">Confirm Password</label>
+        <div class="col-sm-10">
+            <input type="password" name="ConfirmPassword" class="form-control" onkeypress="myfunction()"  id="confirmPassword" placeholder="Enter your confirm password" >
+            <p id="confirmPasswordCheck" style="color:red" ></p>
+            
+        </div>
+    </div>
+    
+     <br>
+        <div class="form-group row">
+
+            <a href="https://www.zoho.com/">Terms and Conditions</a>
+
+        </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-6 text-center">
+            <button   id="btn1" class="btn btn-primary" onclick = "validate()" name="page" value="submit" > Submit</button>
+        </div>
+        <div class="col-sm-6 text-center">
+            <button type="submit" class="btn btn-warning">Reset</button>
+        </div>
+    </div>
+<!-- </form>  -->
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+<script>
+
+function myfunction(){
+	 var h = document.getElementById("password").value;	 
+	 
+	
+	if(h.length<8){
+		
+		document.getElementById("passwordCheck").innerHTML="Password length must be more than 8";
+		 document.getElementById("passwordCheck").style.display='block';
+		
+	}
+	
+	else if(h.search(/[0-9]/)==-1){
+		
+		document.getElementById("passwordCheck").innerHTML="Contains atleast one number";
+		 document.getElementById("passwordCheck").style.display='block';
+		
+	}
+	
+	else if(h.search(/[a-z]/)==-1){
+	
+	document.getElementById("passwordCheck").innerHTML="Contains atleast one small letter";
+	 document.getElementById("passwordCheck").style.display='block';
+	
+}
+
+	else if(h.search(/[A-Z]/)==-1){
+	
+	document.getElementById("passwordCheck").innerHTML="Contains atleast one captital letter";
+	 document.getElementById("passwordCheck").style.display='block';
+	
+}
+	
+ 	else{
+	document.getElementById("passwordCheck").style.display='none';
+}
+
+}
+
+
+
+
+
+
+function isInputNumber(evt){
+	var ch = String.fromCharCode(evt.which);
+	if(!(/[0-9]/.test(ch)))
+		evt.preventDefault();
+}
+
+
+
+
+function validate(){
+	var a = document.getElementById("name").value;
+	var b = document.getElementById("mobile").value;
+	var c = document.getElementById("bankName").value;
+	var d = document.getElementById("balance").value;
+	var e = document.getElementById("address").value;
+	var f = document.getElementById("password").value;
+	var g= document.getElementById("confirmPassword").value;
+	
+	if(a==''){
+		
+		document.getElementById("nameCheck").innerHTML="Please enter your name";
+		 document.getElementById("nameCheck").style.display='block';
+	}
+	else{
+		document.getElementById("nameCheck").style.display='none';
+	} 
+if(b==''){
+		
+		document.getElementById("mobileCheck").innerHTML="Please enter your mobile number";
+		 document.getElementById("mobileCheck").style.display='block';
+	}
+else if(b.length!=10){
+	
+		document.getElementById("mobileCheck").innerHTML="Mobile number must be 10 digit";
+	 	document.getElementById("mobileCheck").style.display='block';
+}
+	else{
+		document.getElementById("mobileCheck").style.display='none';
+	} 
+if(c==''){
+	
+	document.getElementById("bankCheck").innerHTML="Please enter your bank name";
+	 document.getElementById("bankCheck").style.display='block';
+}
+ else{
+	document.getElementById("bankCheck").style.display='none';
+} 
+if(d==''){
+	
+	document.getElementById("balanceCheck").innerHTML="Please enter your balance";
+	 document.getElementById("balanceCheck").style.display='block';
+}
+ else{
+	document.getElementById("balanceCheck").style.display='none';
+} 
+ if(e==''){
+	
+	document.getElementById("addressCheck").innerHTML="Please enter your address";
+	 document.getElementById("addressCheck").style.display='block';
+}
+ else{
+	document.getElementById("addressCheck").style.display='none';
+}  
+ if(f==''){
+		
+		document.getElementById("passwordCheck").innerHTML="Please enter your password";
+		 document.getElementById("passwordCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("passwordCheck").style.display='none';
+	}  
+ if(g==''){
+		
+		document.getElementById("confirmPasswordCheck").innerHTML="Please enter your confirm password";
+		 document.getElementById("confirmPasswordCheck").style.display='block';
+	}
+	 else{
+		document.getElementById("confirmPasswordCheck").style.display='none';
+	}  
+
+ 
+ if(f == g){
+	 document.getElementById("confirmPasswordCheck").style.display='none';
+}
+ else{
+	 document.getElementById("confirmPasswordCheck").innerHTML="password and confirm password is incorrect";
+	 document.getElementById("confirmPasswordCheck").style.display='block';
+	
+ }
+ 
+ 
+ if(document.getElementById("nameCheck").style.display=='none' && document.getElementById("mobileCheck").style.display=='none' &&document.getElementById("bankCheck").style.display=='none' &&document.getElementById("balanceCheck").style.display=='none' && document.getElementById("addressCheck").style.display=='none'  && document.getElementById("passwordCheck").style.display=='none'  && document.getElementById("confirmPasswordCheck").style.display=='none' )
+save();
+} 
+
+ function save(){
+		var name = $("#name").val();
+		var mobile = $("#mobile").val();
+		var bankName = $("#bankName").val();
+		var address = $("#address").val();
+		var balance = $("#balance").val();
+		var Password = $('#password').val();
+		$.ajax({
+			type:'POST',
+			url:'MyServlett?Name='+name+'&mobile='+mobile+'&bankname='+bankName+'&balance='+balance+'&Address='+address+'&Password='+Password+'&page=submit',
+			success: function(result){
+				
+				$("#SuccessMsg").html(result);
+			} 
+	 	});
+	} 
+
+</script>
+
+
+
+
+
+</body>
+
+</html>

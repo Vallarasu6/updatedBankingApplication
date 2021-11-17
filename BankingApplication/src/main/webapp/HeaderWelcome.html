@@ -1,0 +1,50 @@
+<nav class="navbar navbar-light bg-light" >
+    <a class="navbar-brand" href="#">
+        <img src="zoho-logo.png" class="img-rounded" alt="zoho image" width="90" height="90">
+    </a>
+    <a class="navbar-brand"><b>ZOHO</b><i>Pay</i> </a>
+    <div>
+   <button id="loginBtn" class="btn btn-primary index" style="float:left;">Login</button>&nbsp;
+    <button id="registerBtn" class="btn btn-primary index" >Register</button>
+    </div>
+    <!--  <button id="loginBtn">Login</button>
+ <button id="registerBtn">Register</button> -->
+ 
+</nav>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+
+
+ $(document).ready(function(){
+	
+	
+	
+	
+	$("#loginBtn").click(function(){
+		
+		$(".index").hide();
+		
+		$("#login").load("Login.html");
+		$("#login").show();
+		
+	
+});
+	
+	$("#registerBtn").click(function(){
+		
+		$(".index").hide();
+		$("#register").load("AddCustomer.html");
+		$("#register").show();
+	
+});
+	
+	
+	
+});
+
+
+
+
+
+</script>

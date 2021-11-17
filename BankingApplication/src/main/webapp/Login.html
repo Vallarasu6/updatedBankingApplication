@@ -1,0 +1,149 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+</head>
+<body>
+<div id="log1"></div>
+<div id="admin1"></div>
+     <div id="logs">
+     
+    <div class="col">
+    <div class="container">
+    <div class="text-center">
+       <div class="form-group row" >
+        <label for="name" class="col-sm-12 col-form-label fw-bold mb-2 text-uppercase "><b>User Login</b></label>
+       
+    </div>
+    <div id="error" style="color:red"> </div>
+    <div class="form-group row" >
+   
+        <label for="name" class="col-sm-3 col-form-label">Id</label>
+        <div class="col-sm-9" >
+            <input type="number" name = "Id" class="form-control"  id="id" placeholder="Enter your id" required>
+           <p id="idCheck" style="color:red" ></p>
+        </div>
+    </div>
+   
+    <div class="form-group row">
+        <label for="password" class="col-sm-3 col-form-label">Password</label>
+        <div class="col-sm-9">
+            <input type="password" name="Password" class="form-control"  id="password" placeholder="Enter your password" >
+            <p id="passwordCheck" style="color:red" ></p>
+            
+        </div>
+    </div>
+    
+    
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <button  id="btn1" class="btn btn-primary" onclick = "validate()" name="page" value="loginSubmit" > Login</button><br><br>
+            <!-- <p>Don't you have account?<button id="registerBtns" class="btn btn-primary " >Register</button></p> -->
+          
+        </div>
+        </div>
+    </div>
+  
+  </div>
+ 
+ </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+
+function isInputNumber(evt){
+	var ch = String.fromCharCode(evt.which);
+	if(!(/[0-9]/.test(ch)))
+		evt.preventDefault();
+}
+
+
+
+function validate(){
+	
+	var a = document.getElementById("id").value;
+	var b = document.getElementById("password").value;
+	
+	
+	if(a==''){
+		
+		document.getElementById("idCheck").innerHTML="Please enter your id";
+		 document.getElementById("idCheck").style.display='block';
+	}
+	else{
+		document.getElementById("idCheck").style.display='none';
+	} 
+if(b==''){
+		
+		document.getElementById("passwordCheck").innerHTML="Please enter your password";
+		 document.getElementById("passwordCheck").style.display='block';
+	}
+	else{
+		document.getElementById("passwordCheck").style.display='none';
+	} 
+if(document.getElementById("passwordCheck").style.display=='none' && document.getElementById("idCheck").style.display=='none' )
+	save();
+	} 
+	
+function save(){
+	var password = $("#password").val();
+	var Id = $("#id").val();
+
+	$.ajax({
+		type:'POST',
+		url:'MyServlett?Id='+Id+'&Password='+password+'&page=loginSubmit',
+		//url:'loginservlet?Id='+Id+'&Password='+password+'&page=loginSubmit',
+		success: function(result){
+			
+			if(result === "false"){
+				$("#error").html('User id or password is Wrong');
+				
+			}
+			else if(result === "admin"){
+				$("#logs").hide();
+				$("#admin1").load("sidenav.html");
+				$("#admin1").show();
+				$("#btns").hide();
+			}
+		 else{
+			
+				$("#logs").hide();
+				$("#log1").load("LoginSideNav.html");
+				$("#btns").hide();
+				
+				} 
+		}
+ 	});
+}
+
+/* $(document).ready(function(){
+
+$("#registerBtns").click(function(){
+	alert("hi");
+	 $("#logs").hide(); 
+	$("#registers").load("AddCustomer.html");
+	 $("#registers").show(); 
+
+});
+
+});
+ */
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
